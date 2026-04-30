@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     private float Yaw;
 
+    [SerializeField] Transform propeller;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +30,7 @@ public class PlayerController : MonoBehaviour
         float roll = Mathf.Lerp(0, 30, Mathf.Abs(horizontalInput)) * -Mathf.Sign(horizontalInput);
 
         transform.localRotation = Quaternion.Euler(Vector3.up * Yaw + Vector3.right * pitch + Vector3.forward * roll);
+
+        propeller.Rotate(Vector3.right);
     }
 }
