@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public float FlySpeed = 5;
     public float YawAmount = 120;
+    public TextMeshProUGUI speedText;
 
     private float Yaw;
 
@@ -32,5 +34,7 @@ public class PlayerController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(Vector3.up * Yaw + Vector3.right * pitch + Vector3.forward * roll);
 
         propeller.Rotate(Vector3.right);
+
+        speedText.text = $"{FlySpeed} km/h";
     }
 }
