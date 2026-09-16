@@ -35,6 +35,6 @@ public class PlayerController : MonoBehaviour
 
         propeller.Rotate(Vector3.right);
 
-        speedText.text = $"{FlySpeed} km/h";
+        speedText.text = $"{FlySpeed * 3.6f:0} km/h";
     }
 }
