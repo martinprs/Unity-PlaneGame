@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -134,7 +135,6 @@ public class MainMenu : MonoBehaviour
 
     public void ExitToMenu()
     {
-        return;
-        // Needs main menu scene
+        SceneManager.LoadScene("Menu");
     }
 }
