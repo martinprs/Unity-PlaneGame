@@ -62,9 +62,9 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Menu()
-    {   
+    {
         SetPostProcessing(true);
-        PauseFlight();
+        PauseFlight(true);
         MenuCanvas.SetActive(true);
         GameCanvas.SetActive(false);
         ControlsMenuCanvas.SetActive(false);
@@ -72,7 +72,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void ControlsMenu()
-    {   
+    {
         MenuCanvas.SetActive(false);
         GameCanvas.SetActive(false);
         ControlsMenuCanvas.SetActive(true);
@@ -80,7 +80,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void ExitControlsMenu()
-    {   
+    {
         MenuCanvas.SetActive(true);
         GameCanvas.SetActive(false);
         ControlsMenuCanvas.SetActive(false);
@@ -88,46 +88,52 @@ public class MainMenu : MonoBehaviour
     }
 
     public void ResumeGame()
-    {   
+    {
         SetPostProcessing(false);
-        playerController.FlySpeed = flySpeedBeforeMenu;
+        PauseFlight(false);
         MenuCanvas.SetActive(false);
         GameCanvas.SetActive(true);
         ControlsMenuCanvas.SetActive(false);
         EndMenuCanvas.SetActive(false);
     }
 
-    private void PauseFlight()
+    private void PauseFlight(bool enabled)
     {
-        if (playerController.FlySpeed > 0)
+        if (enabled)
         {
-            flySpeedBeforeMenu = playerController.FlySpeed;
-        }
+            if (playerController.FlySpeed > 0)
+            {
+                flySpeedBeforeMenu = playerController.FlySpeed;
+            }
 
-        playerController.FlySpeed = 0;
+            playerController.FlySpeed = 0;
+        }
+        else
+        {
+            playerController.FlySpeed = flySpeedBeforeMenu;
+        }
     }
 
     private void SetPostProcessing(bool enabled)
     {
-        if (postProcessingVolume != null)
-        {
-            postProcessingVolume.enabled = enabled;
-        }
+        postProcessingVolume.enabled = enabled;
     }
 
     public void GameEnd()
-    {   
+    {
         MenuCanvas.SetActive(false);
         GameCanvas.SetActive(false);
         ControlsMenuCanvas.SetActive(false);
         EndMenuCanvas.SetActive(true);
     }
 
-    public void RestartGame() {
+    public void RestartGame()
+    {
         Application.LoadLevel(Application.loadedLevel);
     }
 
-    public void ExitToMenu() {
+    public void ExitToMenu()
+    {
         return;
         // Needs main menu scene
     }
