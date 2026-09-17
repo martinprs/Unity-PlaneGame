@@ -117,7 +117,10 @@ public class MainMenu : MonoBehaviour
     }
 
     public void GameEnd()
-    {
+    {   
+        announcerText.text = "You lost!";
+        SetPostProcessing(true);
+        PauseFlight(true);
         MenuCanvas.SetActive(false);
         GameCanvas.SetActive(false);
         ControlsMenuCanvas.SetActive(false);

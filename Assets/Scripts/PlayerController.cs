@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float FlySpeed = 5;
     public float YawAmount = 120;
     public TextMeshProUGUI speedText;
+    public MainMenu mainMenu;
 
     private float Yaw;
 
@@ -16,7 +17,12 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
+    }
+
+    private void Awake()
+    {
+        mainMenu = FindObjectOfType<MainMenu>();
     }
 
     // Update is called once per frame
@@ -36,5 +42,13 @@ public class PlayerController : MonoBehaviour
         propeller.Rotate(Vector3.right);
 
         speedText.text = $"{FlySpeed * 3.6f:0} km/h";
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Danger"))
+        {
+            mainMenu.GameEnd();
+        }
     }
 }
