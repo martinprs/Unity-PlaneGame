@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(Vector3.up * Yaw + Vector3.right * pitch + Vector3.forward * roll);
 
-        propeller.Rotate(Vector3.right);
+        propeller.Rotate(Vector3.right * 20f);
 
         speedText.text = $"{FlySpeed * 3.6f:0} km/h";
     }
