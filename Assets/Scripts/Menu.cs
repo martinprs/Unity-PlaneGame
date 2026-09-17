@@ -9,6 +9,9 @@ public class MainMenu : MonoBehaviour
     public GameObject ControlsMenuCanvas;
     public GameObject EndMenuCanvas;
     public GameObject GameCanvas;
+    public PlayerController playerController;
+
+    private float flySpeedBeforeMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -43,8 +46,17 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if (playerController == null)
+        {
+            playerController = FindObjectOfType<PlayerController>();
+        }
+    }
+
     public void Menu()
     {   
+        PauseFlight();
         MenuCanvas.SetActive(true);
         GameCanvas.SetActive(false);
         ControlsMenuCanvas.SetActive(false);
@@ -69,10 +81,21 @@ public class MainMenu : MonoBehaviour
 
     public void ResumeGame()
     {   
+        playerController.FlySpeed = flySpeedBeforeMenu;
         MenuCanvas.SetActive(false);
         GameCanvas.SetActive(true);
         ControlsMenuCanvas.SetActive(false);
         EndMenuCanvas.SetActive(false);
+    }
+
+    private void PauseFlight()
+    {
+        if (playerController.FlySpeed > 0)
+        {
+            flySpeedBeforeMenu = playerController.FlySpeed;
+        }
+
+        playerController.FlySpeed = 0;
     }
 
     public void GameEnd()
