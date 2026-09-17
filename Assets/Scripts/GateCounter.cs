@@ -24,9 +24,9 @@ public class GateCounter : MonoBehaviour
 
             playerController.FlySpeed += 5f;
 
-            gateText.text = $" {gatesPassed} / 5 Gates passed";
+            gateText.text = $" {gatesPassed} / 10 Gates passed";
 
-            if (gatesPassed >= 5)
+            if (gatesPassed >= 10)
             {
                 announcerText.text = "You win!";
             }
