@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public GameObject EndMenuCanvas;
     public GameObject GameCanvas;
     public PlayerController playerController;
+    public PostProcessVolume postProcessingVolume;
 
     private float flySpeedBeforeMenu;
 
@@ -52,10 +54,16 @@ public class MainMenu : MonoBehaviour
         {
             playerController = FindObjectOfType<PlayerController>();
         }
+
+        if (postProcessingVolume == null)
+        {
+            postProcessingVolume = FindObjectOfType<PostProcessVolume>();
+        }
     }
 
     public void Menu()
     {   
+        SetPostProcessing(true);
         PauseFlight();
         MenuCanvas.SetActive(true);
         GameCanvas.SetActive(false);
@@ -81,6 +89,7 @@ public class MainMenu : MonoBehaviour
 
     public void ResumeGame()
     {   
+        SetPostProcessing(false);
         playerController.FlySpeed = flySpeedBeforeMenu;
         MenuCanvas.SetActive(false);
         GameCanvas.SetActive(true);
@@ -96,6 +105,14 @@ public class MainMenu : MonoBehaviour
         }
 
         playerController.FlySpeed = 0;
+    }
+
+    private void SetPostProcessing(bool enabled)
+    {
+        if (postProcessingVolume != null)
+        {
+            postProcessingVolume.enabled = enabled;
+        }
     }
 
     public void GameEnd()
