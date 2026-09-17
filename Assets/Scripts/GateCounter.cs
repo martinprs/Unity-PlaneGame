@@ -7,6 +7,7 @@ public class GateCounter : MonoBehaviour
 {
     private int gatesPassed = 0;
     private PlayerController playerController;
+    private MainMenu mainMenu;
 
     public TextMeshProUGUI gateText;
     public TextMeshProUGUI announcerText;
@@ -14,6 +15,7 @@ public class GateCounter : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        mainMenu = FindObjectOfType<MainMenu>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +30,7 @@ public class GateCounter : MonoBehaviour
 
             if (gatesPassed >= 10)
             {
-                announcerText.text = "You win!";
+                mainMenu.GameEnd("You win!");
             }
 
             Destroy(other.gameObject);

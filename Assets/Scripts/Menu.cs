@@ -117,9 +117,9 @@ public class MainMenu : MonoBehaviour
         postProcessingVolume.enabled = enabled;
     }
 
-    public void GameEnd()
+    public void GameEnd(string text)
     {   
-        announcerText.text = "You lost!";
+        announcerText.text = text;
         SetPostProcessing(true);
         PauseFlight(true);
         MenuCanvas.SetActive(false);
