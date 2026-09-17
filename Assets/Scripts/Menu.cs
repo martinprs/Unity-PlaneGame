@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.Rendering.PostProcessing;
 
 public class MainMenu : MonoBehaviour
@@ -12,6 +13,7 @@ public class MainMenu : MonoBehaviour
     public GameObject GameCanvas;
     public PlayerController playerController;
     public PostProcessVolume postProcessingVolume;
+    public TextMeshProUGUI announcerText;
 
     private float flySpeedBeforeMenu;
 
@@ -62,7 +64,8 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Menu()
-    {
+    {   
+        announcerText.text = "Paused";
         SetPostProcessing(true);
         PauseFlight(true);
         MenuCanvas.SetActive(true);
@@ -72,23 +75,17 @@ public class MainMenu : MonoBehaviour
     }
 
     public void ControlsMenu()
-    {
+    {   
+        announcerText.text = "Shortcut controls";
         MenuCanvas.SetActive(false);
         GameCanvas.SetActive(false);
         ControlsMenuCanvas.SetActive(true);
         EndMenuCanvas.SetActive(false);
     }
 
-    public void ExitControlsMenu()
-    {
-        MenuCanvas.SetActive(true);
-        GameCanvas.SetActive(false);
-        ControlsMenuCanvas.SetActive(false);
-        EndMenuCanvas.SetActive(false);
-    }
-
     public void ResumeGame()
     {
+        announcerText.text = "";
         SetPostProcessing(false);
         PauseFlight(false);
         MenuCanvas.SetActive(false);
